@@ -1,16 +1,14 @@
 window.addEventListener("DOMContentLoaded", main);
 
 let timeoutRef;
-// let breakInterval;
+let breakInterval;  // lagt i ett global scope för att kuna ändra värdet i det och hämtas in i andra funktioner.
 
 function main() {
   // Start på programmet
   // main är en callback funktion
 
   timeoutRef = setTimeout(changeBackgroundColor, 4000);
-  addEventListeners();
-
-  intervalRef = setInterval(startBackgroundChangeInterval);
+  addEventListeners(changeBackgroundColor);
 }
 
 function changeBackgroundColor() {
@@ -21,6 +19,9 @@ function addEventListeners() {
   const cancelTimeoutBtn = document.getElementById("cancel");
   cancelTimeoutBtn.addEventListener("click", cancelBackgroundChange);
 
+  const cancelIntervalBtn = document.getElementById("stop-interval");  // Hämtar id från knapp och knapp tilldelas click och kör cancelBackgroundColor
+  cancelIntervalBtn.addEventListener("click", cancelBackgroundInterval);
+
   const startIntervalButton = document.getElementById("start-interval");
   startIntervalButton.addEventListener("click", startBackgroundChangeInterval);
 }
@@ -30,21 +31,16 @@ function cancelBackgroundChange() {
 }
 // Ny function som stänger av intervallen
 // ---------------------------------------------------------------
-function cancelBackgroundInterval() {
-  clearInterval(intervalRef);
+function cancelBackgroundInterval() {    // Functionen som kör och hämtar värdet i den globala var breakInterval så ATT det kan avbyta funktionen. 
+  clearInterval(breakInterval);
 }
 
-function clickToStopInterval() {
-  const cancelIntervall = document.getElementById("stop-interval");
-  cancelIntervall.addEventListener("click", cancelBackgroundInterval);
-}
 
-// ------------------------------------------------------------
 
 function startBackgroundChangeInterval() {
-  setInterval(changeBackgroundColor, 500);
+  breakInterval = setInterval(changeBackgroundColor, 500);  // breakInterval får värdet av setInterval som sätts in i globala var breakInterval
 }
-
+// ------------------------------------------------------------
 function getRandomColor() {
   const value = Math.random();
 
