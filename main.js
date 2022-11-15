@@ -16,11 +16,35 @@ function changeBackgroundColor(){
 }
 
 function addEventListeners(){
- const cancelBtn = document.getElementById ("cancel")
- cancelBtn.addEventListener("click", cancelBackgroundChange)
+ const cancelTimeoutBtn = document.getElementById ("cancel")
+ cancelTimeoutBtn.addEventListener("click", cancelBackgroundChange)
+
+ const startIntervalButton = document.getElementById("start-interval")
+ startIntervalButton.addEventListener("click", startBackgroundChangeInterval)
 }
 
 
 function cancelBackgroundChange(){
     clearTimeout(timeoutRef)
+}
+
+function startBackgroundChangeInterval(){
+    setInterval(changeBackgroundColor, 1000)
+}
+
+function getRandomColor() {
+   const value =  Math.random()
+
+   if(value > 0.2) {
+    return "blue"
+   } else if (value < 0.4) {
+    return "red"            // Return gör att man hoppr ur funktionen och skickar värdet i detta fall red.
+   } else if (Value < 0.6) {
+    return "green"
+   } else if (value < 0.8) {
+    return "yellow"
+   } else {
+    return "pink"
+   }
+
 }
