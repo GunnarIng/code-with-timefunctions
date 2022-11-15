@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", main);
 
 let timeoutRef;
+// let breakInterval;
 
 function main() {
   // Start på programmet
@@ -8,6 +9,8 @@ function main() {
 
   timeoutRef = setTimeout(changeBackgroundColor, 4000);
   addEventListeners();
+
+  intervalRef = setInterval(startBackgroundChangeInterval);
 }
 
 function changeBackgroundColor() {
@@ -25,6 +28,18 @@ function addEventListeners() {
 function cancelBackgroundChange() {
   clearTimeout(timeoutRef);
 }
+// Ny function som stänger av intervallen
+// ---------------------------------------------------------------
+function cancelBackgroundInterval() {
+  clearInterval(intervalRef);
+}
+
+function clickToStopInterval() {
+  const cancelIntervall = document.getElementById("stop-interval");
+  cancelIntervall.addEventListener("click", cancelBackgroundInterval);
+}
+
+// ------------------------------------------------------------
 
 function startBackgroundChangeInterval() {
   setInterval(changeBackgroundColor, 500);
