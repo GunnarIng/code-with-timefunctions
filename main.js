@@ -22,7 +22,6 @@ function addEventListeners() {
   startIntervalButton.addEventListener("click", startBackgroundChangeInterval);
 }
 
-
 function cancelBackgroundChange() {
   clearTimeout(timeoutRef);
 }
@@ -37,7 +36,7 @@ function getRandomColor() {
   if (value < 0.2) {
     return "blue";
   } else if (value < 0.4) {
-    return "red"; 
+    return "red";
   } else if (value < 0.6) {
     return "green";
   } else if (value < 0.8) {
